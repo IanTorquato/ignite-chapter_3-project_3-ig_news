@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+import { SignInButton } from '../SignInButton';
 import styles from './styles.module.scss';
 
-export const Header: React.FC = () => {
+export function Header() {
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
@@ -11,6 +12,8 @@ export const Header: React.FC = () => {
           <a href="#" className={styles.active}>Home</a>
           <a href="#">Posts</a>
         </nav>
+
+        <SignInButton />
       </div>
     </header>
   );
