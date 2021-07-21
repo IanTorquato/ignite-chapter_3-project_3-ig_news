@@ -3,6 +3,7 @@ node_modules
 out
 build
 
-.env
+.env*
+!.env*.example
 yarn.lock
 yarn-error.log
