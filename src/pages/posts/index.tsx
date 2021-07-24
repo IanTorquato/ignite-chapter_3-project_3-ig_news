@@ -1,11 +1,23 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Prismic from '@prismicio/client';
+import { RichText } from 'prismic-dom';
 
 import { getPrismicClient } from '../../services/prismic';
 import styles from './styles.module.scss';
 
-export default function Posts() {
+type Post = {
+  slug: string
+  title: string
+  excerpt: string
+  updatedAt: string
+}
+
+type PostsProps = {
+  posts: Post[]
+}
+
+export default function Posts({ posts }: PostsProps) {
   return (
     <>
       <Head>
@@ -14,35 +26,15 @@ export default function Posts() {
 
       <main className={styles.container}>
         <div className={styles.posts}>
-          <a href="#">
-            <time>23 de julho de 2021</time>
+          {posts.map(post => (
+          <a key={post.slug} href="#">
+            <time>{post.updatedAt}</time>
 
-            <strong>Next.JS - Novidades na versão 10 e atualização do blog para melhorar a performance</strong>
+            <strong>{post.title}</strong>
 
-            <p>
-              Se você nos acompanhou nos últimos posts, já viu que criamos um blog com um contador de visitas usando o MongoDB e Next.js, depois adicionamos a funcionalidade de dark mode. Na semana passada aconteceu a Next.js Conf. Uma das surpresas foi o anúncio da versão 10, com várias melhorias. Vamos experimentar algumas dessas melhorias e aplicar na prática no blog que criamos para ir evoluindo com essa ferramenta que tem revolucionado a web.
-            </p>
+            <p>{post.excerpt}</p>
           </a>
-          
-          <a href="#">
-            <time>23 de julho de 2021</time>
-
-            <strong>Next.JS - Novidades na versão 10 e atualização do blog para melhorar a performance</strong>
-
-            <p>
-              Se você nos acompanhou nos últimos posts, já viu que criamos um blog com um contador de visitas usando o MongoDB e Next.js, depois adicionamos a funcionalidade de dark mode. Na semana passada aconteceu a Next.js Conf. Uma das surpresas foi o anúncio da versão 10, com várias melhorias. Vamos experimentar algumas dessas melhorias e aplicar na prática no blog que criamos para ir evoluindo com essa ferramenta que tem revolucionado a web.
-            </p>
-          </a>
-
-          <a href="#">
-            <time>23 de julho de 2021</time>
-
-            <strong>Next.JS - Novidades na versão 10 e atualização do blog para melhorar a performance</strong>
-
-            <p>
-              Se você nos acompanhou nos últimos posts, já viu que criamos um blog com um contador de visitas usando o MongoDB e Next.js, depois adicionamos a funcionalidade de dark mode. Na semana passada aconteceu a Next.js Conf. Uma das surpresas foi o anúncio da versão 10, com várias melhorias. Vamos experimentar algumas dessas melhorias e aplicar na prática no blog que criamos para ir evoluindo com essa ferramenta que tem revolucionado a web.
-            </p>
-          </a>
+          ))}
         </div>
       </main>
     </>
@@ -59,9 +51,18 @@ export const getStaticProps: GetStaticProps = async () => {
     pageSize: 100
   });
 
+  const posts = response.results.map(post => ({
+    slug: post.uid,
+    title: RichText.asText(post.data.title),
+    excerpt: post.data.content.find(content => content.type === 'paragraph')?.text ?? '',
+    updatedAt: new Date(post.last_publication_date).toLocaleDateString('pt-br', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    })
+  }));
+  
   return {
-    props: {
-
-    }
+    props: { posts }
   };
 };
