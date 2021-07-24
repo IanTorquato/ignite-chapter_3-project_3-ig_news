@@ -3,6 +3,7 @@
     "Casefold",
     "Ignews",
     "PRISMIC",
-    "faunadb"
+    "faunadb",
+    "prismicio"
   ]
 }
