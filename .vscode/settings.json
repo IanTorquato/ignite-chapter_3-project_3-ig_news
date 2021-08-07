@@ -4,6 +4,7 @@
     "Ignews",
     "PRISMIC",
     "faunadb",
+    "lcov",
     "prismicio"
   ]
 }

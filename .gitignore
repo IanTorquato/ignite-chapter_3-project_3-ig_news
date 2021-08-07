@@ -1,7 +1,8 @@
-node_modules
 .next
-out
 build
+coverage
+node_modules
+out
 
 .env*
 !.env*.example
