@@ -9,7 +9,7 @@ import styles from './home.module.scss';
 type HomeProps = {
   product: {
     priceId: string
-    amount: number
+    amount: string
   }
 }
 
