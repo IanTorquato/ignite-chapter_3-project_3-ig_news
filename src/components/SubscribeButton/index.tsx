@@ -18,6 +18,7 @@ export function SubscribeButton() {
 
     if (session.activeSubscription) {
       router.push('/posts');
+
       return;
     }
         
@@ -35,7 +36,7 @@ export function SubscribeButton() {
   }
 
   return (
-    <button className={styles.subscribeButton} type="button" onClick={handleSubscribe} >
+    <button className={styles.subscribeButton} type="button" onClick={handleSubscribe}>
       Subscribe now
     </button>
   );

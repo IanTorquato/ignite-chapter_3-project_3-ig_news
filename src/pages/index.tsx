@@ -7,10 +7,7 @@ import { stripe } from '../services/stripe';
 import styles from './home.module.scss';
 
 type HomeProps = {
-  product: {
-    priceId: string
-    amount: string
-  }
+  product: { priceId: string; amount: string }
 }
 
 export default function Home({ product }: HomeProps) {

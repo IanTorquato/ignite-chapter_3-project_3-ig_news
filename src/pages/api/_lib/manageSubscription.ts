@@ -1,4 +1,5 @@
 import { query as q } from 'faunadb';
+
 import { fauna } from '../../../services/fauna';
 import { stripe } from '../../../services/stripe';
 
@@ -23,8 +24,6 @@ export async function saveSubscription(subscriptionId: string, customerId: strin
     status: subscription.status,
     price_id: subscription.items.data[0].price.id,
   };
-
-  console.log(subscriptionData);
 
   if (createAction) {
     await fauna.query(

@@ -24,9 +24,7 @@ describe('Post page', () => {
 
     getSessionMocked.mockReturnValueOnce(null);
 
-    const response = await getServerSideProps({
-      params: { slug: 'new-post' }
-    } as any);
+    const response = await getServerSideProps({ params: { slug: 'new-post' } } as any);
     
     expect(response).toEqual(expect.objectContaining({
       redirect: expect.objectContaining({ destination: '/' })
@@ -49,9 +47,7 @@ describe('Post page', () => {
       })
     } as any);
 
-    const response = await getServerSideProps({
-      params: { slug: 'new-post' }
-    } as any);
+    const response = await getServerSideProps({ params: { slug: 'new-post' } } as any);
     
     expect(response).toEqual(expect.objectContaining({
       props: {

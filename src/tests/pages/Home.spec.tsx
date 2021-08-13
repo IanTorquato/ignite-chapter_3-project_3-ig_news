@@ -22,10 +22,7 @@ describe('Home page', () => {
   it('loads initial data', async () => {
     const retrieveStripePricesMocked = mocked(stripe.prices.retrieve);
 
-    retrieveStripePricesMocked.mockResolvedValueOnce({
-      id: 'fake',
-      unit_amount: 1000
-    } as any);
+    retrieveStripePricesMocked.mockResolvedValueOnce({ id: 'fake', unit_amount: 1000 } as any);
 
     const response = await getStaticProps({});
     

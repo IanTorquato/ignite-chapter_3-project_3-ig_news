@@ -33,9 +33,7 @@ describe('PostPreview page', () => {
     const pushMock = jest.fn();
 
     useSessionMocked.mockReturnValueOnce([{ activeSubscription: 'fake' }, false]);
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMock
-    } as any);
+    useRouterMocked.mockReturnValueOnce({ push: pushMock } as any);
 
     render(<PostPreview post={post} />);
     
@@ -55,9 +53,7 @@ describe('PostPreview page', () => {
       })
     } as any);
 
-    const response = await getStaticProps({
-      params: { slug: 'new-post' }
-    } as any);
+    const response = await getStaticProps({ params: { slug: 'new-post' } } as any);
     
     expect(response).toEqual(expect.objectContaining({
       props: {

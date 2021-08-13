@@ -3,9 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { ActiveLink } from '.';
 
 jest.mock('next/router', () => ({
-  useRouter: () => ({
-    asPath: '/'
-  })
+  useRouter: () => ({ asPath: '/' })
 }));
 
 describe('ActiveLink component', () => {

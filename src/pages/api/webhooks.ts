@@ -9,18 +9,14 @@ async function buffer(readable: Readable) {
   const chunks = [];
 
   for await (const chunk of readable) {
-    chunks.push(
-      typeof chunk ==='string' ? Buffer.from(chunk) : chunk
-    );
+    chunks.push(typeof chunk ==='string' ? Buffer.from(chunk) : chunk);
   }
 
   return Buffer.concat(chunks);
 }
 
 export const config = {
-  api: {
-    bodyParser: false
-  }
+  api: { bodyParser: false }
 };
 
 const relevantEvents = new Set([
@@ -48,7 +44,6 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
         switch (event.type) {
           case 'customer.subscription.updated':
           case 'customer.subscription.deleted':
-            
             const subscription = event.data.object as Stripe.Subscription;
           
             await saveSubscription(subscription.id, subscription.customer.toString());
@@ -56,7 +51,6 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
             break;
 
           case 'checkout.session.completed':
-
             const checkoutSession = event.data.object as Stripe.Checkout.Session;
 
             await saveSubscription(checkoutSession.subscription.toString(), checkoutSession.customer.toString(), true);
